@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+    <meta name="msapplication-tap-highlight" content="no"/>
+    
+    <title>3D car|showTime</title>
+    <script src="jquery.min.js"></script>
+    <script src="jquery.rotate.min.js"></script>
+    <script src="resLoader.js"></script>
+    
+    <style>
+	body{/*background-image:url(images/1.jpg);*/width:100%;height:100%;overflow:hidden;}
+	.box{/*background-image:url(images/1.jpg); */background-repeat:no-repeat;width:100%;height:100%;position:fixed;top:0px;left:0px;display:block;z-index:1;}
+	.box2{width:100%;height:100%;position:fixed;top:0px;left:0px;display:block;z-index:1000;}
+	.box2.on{cursor:move;}
+	.bb{width:100%;height:100%;position:absolute;top:0px;left:0px;display:none;}
+	.b1{background-image:url(images/1.jpg);background-size:cover;}
+	.b2{background-image:url(images/2.jpg);background-size:cover;}
+	.b3{background-image:url(images/3.jpg);background-size:cover;}
+	.b4{background-image:url(images/4.jpg);background-size:cover;}
+	.b5{background-image:url(images/5.jpg);background-size:cover;}
+	.b6{background-image:url(images/6.jpg);background-size:cover;}
+	.b7{background-image:url(images/7.jpg);background-size:cover;}
+	.b8{background-image:url(images/8.jpg);background-size:cover;}
+	.b9{background-image:url(images/9.jpg);background-size:cover;}
+	.b10{background-image:url(images/10.jpg);background-size:cover;}
+	.b11{background-image:url(images/11.jpg);background-size:cover;}
+	.b12{background-image:url(images/12.jpg);background-size:cover;}
+	.b13{background-image:url(images/13.jpg);background-size:cover;}
+	.b14{background-image:url(images/14.jpg);background-size:cover;}
+	.b15{background-image:url(images/15.jpg);background-size:cover;}
+	.b16{background-image:url(images/16.jpg);background-size:cover;}
+	.b17{background-image:url(images/17.jpg);background-size:cover;}
+	.b18{background-image:url(images/18.jpg);background-size:cover;}
+	.b19{background-image:url(images/19.jpg);background-size:cover;}
+	.b20{background-image:url(images/20.jpg);background-size:cover;}
+	.b21{background-image:url(images/21.jpg);background-size:cover;}
+	.b22{background-image:url(images/22.jpg);background-size:cover;}
+	.b23{background-image:url(images/23.jpg);background-size:cover;}
+	.b24{background-image:url(images/24.jpg);background-size:cover;}
+	.b25{background-image:url(images/25.jpg);background-size:cover;}
+	.b26{background-image:url(images/26.jpg);background-size:cover;}
+	.b27{background-image:url(images/27.jpg);background-size:cover;}
+	.b28{background-image:url(images/28.jpg);background-size:cover;}
+	.b29{background-image:url(images/29.jpg);background-size:cover;}
+	.b30{background-image:url(images/30.jpg);background-size:cover;}
+	.b31{background-image:url(images/31.jpg);background-size:cover;}
+	.b32{background-image:url(images/32.jpg);background-size:cover;}
+	.b33{background-image:url(images/33.jpg);background-size:cover;}
+	.b34{background-image:url(images/34.jpg);background-size:cover;}
+	
+	.m{position:absolute;top:;z-index:100;height:33px;width:0px;overflow:hidden;}
+	.m4{left:45%;top:35%;}
+	.m3{left:70%;top:60%;}
+	
+	.left_top{position:absolute;left:3%;top:6%;}
+	
+	.point{position:absolute;top:50%;left:50%;margin-left:-45px;margin-top:-45px;}
+	</style>
+</head>
+<body>
+
+    
+    <script>
+	$(function(){
+		$('#wrapper').hide();
+		
+		$(".box").children(".b1").show().siblings(".bb").hide();
+		m_a_show();
+		
+		var run_ok=$(".box").attr("alt");
+		isdown=false;
+		$(".box2").mousedown(function(e){
+			isdown=true;
+			left = e.pageX;	
+			
+			$('.point').hide();
+			$('.box2').addClass("on");
+			
+			$(".box2").mousemove(function(e){
+			if(isdown){
+				var l_r_ok=$(".box").attr("alt");
+				
+				m_left = e.pageX-left;
+				if(m_left > 0 & l_r_ok == 1){
+					m_a_hide();
+					if((m_left%5)==0){
+						img_num=m_left/5
+						//$("p").html(img_num)
+						if(img_num<35){
+							//$(".box").css({"background-image":"url(images/"+img_num+".jpg)"})
+							$(".box").children(".b"+img_num).show().siblings(".bb").hide();
+							if(img_num>35){img_num=34}
+							$(".box").attr("data",img_num);
+							if(img_num==34){
+								$(".box").attr("alt","0");
+								m_a_show();
+							}
+						}
+					}
+				}else if(m_left < 0 & l_r_ok == 0){
+					m_a_hide();
+					m_left =left - e.pageX;
+					if((m_left%5)==0){
+						img_num=34-(m_left/5);
+						//$("p").html(img_num)
+						if(img_num>0){
+							//$(".box").css({"background-image":"url(images/"+img_num+".jpg)"})
+							$(".box").children(".b"+img_num).show().siblings(".bb").hide();
+							if(img_num==0){img_num=1}
+							$(".box").attr("data",img_num);
+							if(img_num==1){
+								$(".box").attr("alt","1");
+								m_a_show();
+							}
+						}
+					}
+				}
+			}
+			
+			$(".box2").mouseup(function(){
+				if(isdown){
+					isdown=false;
+					//$("p").html(img_num)
+					$('.box2').removeClass("on");
+					img_num=$(".box").attr("data");
+					if(img_num>17){
+						setTimeout(runright,40)
+					}else{
+						setTimeout(runleft,40)
+					}
+				}
+			})
+			
+		})
+		
+		})
+	})
+	
+	
+	
+	function runright(){
+		img_num=$(".box").attr("data");
+		if(img_num<35 && img_num>17 ){
+			//$(".box").css({"background-image":"url(images/"+img_num+".jpg)"});
+			$(".box").children(".b"+img_num).show().siblings(".bb").hide();
+			img_num = Number(img_num) + 1;
+			$(".box").attr("data",img_num);
+			setTimeout(runright,40);
+			if(img_num==34){
+				$(".box").attr("alt","0")
+				m_a_show();
+			}
+		}else{
+			return false;
+		}	
+	}
+	function runleft(){
+		img_num=$(".box").attr("data");
+		if(img_num>0 && img_num<18){
+			
+			//$(".box").css({"background-image":"url(images/"+img_num+".jpg)"});
+			$(".box").children(".b"+img_num).show().siblings(".bb").hide();
+			img_num = Number(img_num) - 1;
+			$(".box").attr("data",img_num);
+			setTimeout(runleft,40);
+			if(img_num==1){
+				$(".box").attr("alt","1")
+				m_a_show();
+			}
+		}else{
+			return false;
+		}	
+	}
+	
+	function m_a_show(){
+		var run = $(".box").attr("data");
+		if(run==1){
+			$(".m4").stop().css({"top":"25%","left":"40%"});
+			$(".m3").stop().css({"top":"50%","left":"70%"});
+		}else{
+			$(".m4").stop().css({"top":"40%","left":"30%"});
+			$(".m3").stop().css({"top":"40%","left":"70%"});
+		}
+		$(".m4").stop().animate({"width":"225px"},1000);
+		$(".m3").stop().animate({"width":"143px"},1000);
+		
+	}
+	function m_a_hide(){
+		$(".m4").stop().css({"width":"0px"});
+		$(".m3").stop().css({"width":"0px"});
+	}
+	
+	</script>
+    <div class="box2"></div>
+    <div class="box" alt="1" data="1" id="wrapper">
+    	<div class="bb b1"></div>
+        <div class="bb b2"></div>
+        <div class="bb b3"></div>
+        <div class="bb b4"></div>
+        <div class="bb b5"></div>
+        <div class="bb b6"></div>
+        <div class="bb b7"></div>
+        <div class="bb b8"></div>
+        <div class="bb b9"></div>
+        <div class="bb b10"></div>
+        <div class="bb b11"></div>
+        <div class="bb b12"></div>
+        <div class="bb b13"></div>
+        <div class="bb b14"></div>
+        <div class="bb b15"></div>
+        <div class="bb b16"></div>
+        <div class="bb b17"></div>
+        <div class="bb b18"></div>
+        <div class="bb b19"></div>
+        <div class="bb b20"></div>
+        <div class="bb b21"></div>
+        <div class="bb b22"></div>
+        <div class="bb b23"></div>
+        <div class="bb b24"></div>
+        <div class="bb b25"></div>
+        <div class="bb b26"></div>
+        <div class="bb b27"></div>
+        <div class="bb b28"></div>
+        <div class="bb b29"></div>
+        <div class="bb b30"></div>
+        <div class="bb b31"></div>
+        <div class="bb b32"></div>
+        <div class="bb b33"></div>
+        <div class="bb b34"></div>
+        <div class="m m4 show"><img src="images/m4.png"></div>
+        <div class="m m3 show"><img src="images/m3.png"></div>
+        <div class="left_top"><img src="images/headline_0.png"></div>
+        <div class="point"><img src="images/point.png"></div>
+    </div>
+    
+    <p style="position:fixed;top:0px;left:0px;font-size:20px;color:#fff;"></p>
+
+	<div class="loading_box">
+    	<div class="logo">
+    		<img src="images/logo.png" class="big_logo">
+        	<img src="images/logo_s.png" class="small_logo">
+            <p>Loading... 0%</p>
+        </div>
+    </div>
+    
+    <style>
+	.loading_box{width:100%;height:100%;background:#000;position:fixed;left:0px;top:0px;overflow:hidden;z-index:999;}
+	.loading_box .logo{width:100px;height:120px;position:absolute;top:50%;left:50%;margin-left:-50px;}
+	.loading_box .logo img{position:absolute;top:0px;left:0px;width:100px;height:100px;}
+	.loading_box .logo img.small_logo{width:58px;height:58px;left:21px;top:21px;}
+	.loading_box .logo p{width:100px;height:20px;position:absolute;left:0px;top:100px;color:#f1f1f1;text-align:center;}
+	</style>
+<script type="text/javascript">
+
+
+$(document).ready(function(){
+	var angle = 0;
+	setInterval(function(){
+		  angle+=1;
+		 $(".big_logo").rotate(angle);
+	},50);
+	
+	var angle1 = 0;
+	setInterval(function(){
+		  angle1-=1;
+		 $(".small_logo").rotate(angle1);
+	},50);
+});
+
+var loader = new resLoader({
+	resources : [
+		'images/1.jpg',
+		'images/2.jpg',
+		'images/3.jpg',
+		'images/4.jpg',
+		'images/5.jpg',
+		'images/6.jpg',
+		'images/7.jpg',
+		'images/8.jpg',
+		'images/9.jpg',
+		'images/10.jpg',
+		'images/11.jpg',
+		'images/12.jpg',
+		'images/13.jpg',
+		'images/14.jpg',
+		'images/15.jpg',
+		'images/16.jpg',
+		'images/17.jpg',
+		'images/18.jpg',
+		'images/19.jpg',
+		'images/20.jpg',
+		'images/21.jpg',
+		'images/22.jpg',
+		'images/23.jpg',
+		'images/24.jpg',
+		'images/25.jpg',
+		'images/26.jpg',
+		'images/27.jpg',
+		'images/28.jpg',
+		'images/29.jpg',
+		'images/30.jpg',
+		'images/31.jpg',
+		'images/32.jpg',
+		'images/33.jpg',
+		'images/34.jpg'
+	],
+	onStart : function(total){
+		console.log('start:'+total);
+	},
+	onProgress : function(current, total){
+		console.log(current+'/'+total);
+		var percent = current/total*100;
+		$(".loading_box .logo p").text("Loading... "+Math.round(percent)+"%");
+	},
+	onComplete : function(total){
+		$(".loading_box .logo").animate({"top":"40%"},1000,function(){
+			$(this).animate({"top":"130%"},800,function(){})
+		})
+		setTimeout(box_show,2000);
+	}
+});
+loader.start();
+
+function box_show(){
+	$(".loading_box").animate({"top":"-1000px"},1000,function(){
+		$(this).hide();
+	})
+	$('#wrapper').show();
+}
+</script>
+</body>
+</html>
